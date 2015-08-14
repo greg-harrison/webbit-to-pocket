@@ -1,0 +1,22 @@
+<div class="list card" ng-cloak="">
+    <div class="item item-divider">
+        <div class="row">
+            <strong class="col-50" ng-bind="carddata.subreddit"></strong>
+            <div class="col-50">
+                <div style="float:right">
+                    <strong>Score:</strong> <span style="color: #ff8b60" ng-bind="carddata.score"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <a class="row item-text-wrap"
+           style="text-decoration: none; color: #336699;"
+           href="{{carddata.link}}"
+           title="{{carddata.link}}"
+           ng-bind="carddata.title"></a>
+    </div>
+    <div class="item item-divider">
+        <span ng-repeat="tag in carddata.tags track by $index" style="font-size: 12px; float:right; background-color: #cee3f8; border-radius: 5px; margin-left: 1px; padding: 3px;">{{tag}} </span>
+    </div>
+</div>
