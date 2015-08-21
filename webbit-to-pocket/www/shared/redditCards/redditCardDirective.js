@@ -11,13 +11,13 @@
                 collection: '='
             },
             controller: function($scope) {
-                thing = $scope.$parent.thing;
-                tagArray = thing.tags.split(', ');
+                thing = $scope.$parent.thing.data;
+//                tagArray = thing.tags.split(', ');
                 $scope.carddata = {
-                    tags: tagArray,
-                    subreddit: tagArray[0],
+//                    tags: tagArray,
+                    subreddit: 'r/' + thing.subreddit,
                     title: thing.title,
-                    link: thing.link,
+                    link: thing.url,
                     score: thing.score
                 };
             },
