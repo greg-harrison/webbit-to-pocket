@@ -3,7 +3,7 @@
         .module('directives.redditCard', [])
         .directive('redditCard', redditCard);
 
-    function redditCard() {
+    function redditCard(moment) {
         return {
             restrict: 'E', //Can only be instantiated by an Element <search-box>
             replace: true,
@@ -11,10 +11,18 @@
                 collection: '='
             },
             controller: function($scope) {
-                thing = $scope.$parent.thing.data;
-//                tagArray = thing.tags.split(', ');
+                var thing = $scope.$parent.thing.data;
+
+                var subredditData = thing.subreddit,
+                    dateMonth = moment().format('MMMM'),
+                    dateYear = moment().format('YYYY');
+
+                var tagData = "r/"+subredditData + ", " + dateYear + " " + dateMonth;
+
+                var tagArray = tagData.split(', ');
+
                 $scope.carddata = {
-//                    tags: tagArray,
+                    tags: tagArray,
                     subreddit: 'r/' + thing.subreddit,
                     title: thing.title,
                     link: thing.url,

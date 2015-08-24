@@ -24,6 +24,8 @@
     <script src="shared/redditCards/redditCardDirective.js"></script>
     <script src="js/controllers/mainController.js"></script>
     <script src="js/services/redditService.js"></script>
+    <script src="lib/moment/moment.js"></script>
+    <script src="lib/angular-moment/angular-moment.js"></script>
 
   </head>
   <body ng-controller="mainController">
@@ -35,11 +37,17 @@
         </ion-nav-buttons>
       </ion-nav-bar>
       <ion-content class="has-header">
-        <div class="row">
-          <span ng-bind="numRolls()" class="col col-50"></span>
+        <div class="row responsive-sm">
+            <div class="col col-50">
+                <div class="row">
+                    <span ng-bind="message.description"></span> &nbsp;
+                    <span ng-bind="message.time"></span>
+                </div>
+                <span ng-bind="numRolls()" class="row"></span>
+            </div>
           <button ng-click="newPosts()" class="button button-clear button-positive col col-50">New Content Plz</button>
         </div>
-        <div ng-repeat="thing in things | orderBy: '-score' track by $index">
+        <div ng-repeat="thing in things | orderBy:'-data.score'">
           <reddit-card></reddit-card>
         </div>
       </ion-content>

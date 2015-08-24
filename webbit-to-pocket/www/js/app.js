@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module('reddit-to-pocket', ['ionic', 'config', 'directives.redditCard', 'mainController', 'redditService'])
+        .module('reddit-to-pocket', ['ionic', 'angularMoment', 'config', 'directives.redditCard', 'mainController', 'redditService'])
 }());

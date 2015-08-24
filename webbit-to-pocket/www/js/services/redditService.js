@@ -5,15 +5,15 @@
 
     function reddit($http) {
 
+
         return {
             getPosts: getPosts
         };
 
         function getPosts() {
-
             var subreddits = ['webdev', 'opensource', 'frontend', 'programming', 'javascript', 'dailyprogrammer'];
             var element = subreddits.toString().replace(/,/g, '+');
-            var limit = 5;
+            var limit = subreddits.length || 5;
             var url = "http://www.reddit.com/r/" + element + "/hot.json?limit=" + limit + "";
 
             function extract(response) {
