@@ -5,15 +5,16 @@
 
     function reddit($http) {
 
-
         return {
             getPosts: getPosts
         };
 
-        function getPosts() {
+        function getPosts(searchVal) {
+            console.log(searchVal);
+
             var subreddits = ['webdev', 'opensource', 'frontend', 'programming', 'javascript', 'dailyprogrammer'];
-            var element = subreddits.toString().replace(/,/g, '+');
             var limit = subreddits.length || 5;
+            var element = searchVal || subreddits.toString().replace(/,/g, '+');
             var url = "http://www.reddit.com/r/" + element + "/hot.json?limit=" + limit + "";
 
             function extract(response) {
@@ -23,6 +24,11 @@
             function getPostsFailed(error) {
                 console.log('XHR Failed for getPosts.' + error.data);
             }
+
+
+            //EACH
+            //FOR each loop iterate over the return statement
+
 
             return $http.get(url)
                 .then(extract)
