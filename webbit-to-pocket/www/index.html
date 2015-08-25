@@ -38,26 +38,23 @@
       </ion-nav-bar>
       <ion-content class="has-header">
         <ion-refresher
-                pulling-text="Pull to refresh..."
-                on-refresh="newPosts(entry)">
+            pulling-text="{{message.description}}&nbsp;{{message.time}}"
+            on-refresh="newPosts(entry)">
         </ion-refresher>
-        <label class="item item-input">
-          <i class="icon ion-search placeholder-icon"></i>
-
-          <form novalidate>
-            <input type="text" placeholder="Search" ng-model="entry.value" ng-model-options="{ updateOn: 'default blur' }"/>
-          </form>
-        </label>
+        <div class="row">
+            <label class="item item-input col-75">
+              <i class="icon ion-search placeholder-icon"></i>
+              <form novalidate>
+                <input type="text" placeholder="Search" ng-model="entry.value" ng-model-options="{ updateOn: 'default blur' }"/>
+              </form>
+            </label>
+            <button class="button button-medium button-dark col-25" ng-click="newPosts(entry)">Go</button>
+        </div>
         <div class="row row-center responsive-lg">
-          <h3 ng-bind="numRolls()" class="col text-center"></h3>
-          <h3 ng-bind="errorMessage"></h3>
-          <div class="col text-center">
-            <span ng-bind="message.description"></span> &nbsp;
-            <span ng-bind="message.time"></span>
-          </div>
+            <h3 ng-bind="errorMessage"></h3>
         </div>
         <div ng-repeat="thing in things | orderBy:'-data.score'">
-          <reddit-card></reddit-card>
+            <reddit-card></reddit-card>
         </div>
       </ion-content>
     </ion-pane>

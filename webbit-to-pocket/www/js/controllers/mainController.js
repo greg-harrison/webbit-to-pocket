@@ -10,6 +10,9 @@
 
         vm.master = {};
 
+        // "Pull to Refresh"
+        vm.message = {description: 'Pull to Refresh', time: ''};
+
         vm.numRolls = function () {
             if (vm.buttonCounter == 0) {
                 return "Swipe down to pull posts from Reddit";
@@ -32,19 +35,25 @@
 
                 redditService.getPosts(vm.master)
                     .then(function (items) {
-                        vm.things = items;
+                        if (typeof items == 'undefined') {
+                            vm.errorMessage = 'Sorry about that!';
+                            vm.message = {description: 'Last Attempt:', time: moment().format("h:mm:ss")};
+                        } else {
+                            vm.things = items;
 
-                        vm.message = {
-                            description: 'Last Updated:',
-                            time: moment().format("M-D-YYYY, h:mm:ss") // "Sunday, February 14th 2010, 3:25:50 pm"
-                        };
-                    }, function(reason) {
+                            // "Last Updated: 8-25-2015, 3:25:50"
+                            vm.message = {description: 'Last Updated:', time: moment().format("h:mm:ss")};
+                        }
+                    }, function() {
                         vm.errorMessage = 'Sorry about that!';
+                        vm.message = {description: 'Last Attempt:', time: moment().format("h:mm:ss")};
                     });
                 vm.$broadcast('scroll.refreshComplete');
             } else {
+                vm.message = {description: 'Last Attempt:', time: moment().format("h:mm:ss")};
+
                 vm.$broadcast('scroll.refreshComplete');
-                vm.errorMessage = "Woops!";
+                vm.errorMessage = "There was an error!";
             }
         }
     }
