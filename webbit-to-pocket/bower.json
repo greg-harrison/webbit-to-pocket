@@ -7,6 +7,7 @@
     "moment": "~2.10.6"
   },
   "dependencies": {
-    "angular-moment": "~0.10.2"
+    "angular-moment": "~0.10.2",
+    "ng-tags-input": "~3.0.0"
   }
 }

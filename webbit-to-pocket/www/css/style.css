@@ -8,3 +8,27 @@
 .container {
     background-color: #EEEEEE;
 }
+
+tags-input .tags .tag-item:nth-child(1n) {
+    background-image: none;
+    background-color: #80CBC4 !important;
+}
+
+tags-input .tags .tag-item:nth-child(2n) {
+    background-image: none;
+    background-color: #9FA8DA !important;
+}
+
+tags-input .tags .tag-item:nth-child(3n) {
+    background-image: none;
+    background-color: #4DD0E1 !important;
+}
+
+tags-input .tags .tag-item:nth-child(5n) {
+    background-image: none;
+    background-color: #AED581 !important;
+}
+
+tags-input .tag-list:empty + .input {
+    width: 100% !important;
+}

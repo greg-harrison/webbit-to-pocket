@@ -6,51 +6,50 @@
     function mainController($scope, redditService, moment) {
         var vm = $scope;
 
-        vm.buttonCounter = 0;
-
-        vm.master = {};
-
         // "Pull to Refresh"
         vm.message = {description: 'Pull to Refresh', time: ''};
 
-        vm.numRolls = function () {
-            if (vm.buttonCounter == 0) {
-                return "Swipe down to pull posts from Reddit";
-            } else {
-                return "Pull number " + vm.buttonCounter;
-            }
-        };
-
         vm.newPosts = function(entry) {
 
-            vm.buttonCounter++;
-            vm.numRolls();
+        vm.things = [];
 
-            if (typeof entry !== 'undefined' && entry.value !== null) {
-                var newVal = entry.value.toString().replace(/\s/g, '+');
-                vm.master = angular.copy(newVal);
+            if (typeof entry !== 'undefined') {
+
+                var search = entry.map(function(elem){
+                    return elem.text;
+                }).join("+");
+
+                console.log(entry.length);
+
                 vm.errorMessage = "";
 
-                vm.things = [];
-
-                redditService.getPosts(vm.master)
+                redditService.getPosts(search)
                     .then(function (items) {
                         if (typeof items == 'undefined') {
                             vm.errorMessage = 'Sorry about that!';
-                            vm.message = {description: 'Last Attempt:', time: moment().format("h:mm:ss")};
+                            vm.message = {description: 'Last Attempt:', time: moment().format("h:mm a")};
+                        } else if (entry.length == 1) {
+                            items.splice(5, Number.MAX_VALUE);
+                            vm.things = items;
+                            items.forEach(function (item) {
+                                console.log(item.data.title)
+                            });
                         } else {
                             vm.things = items;
+                            items.forEach(function (item) {
+                                console.log(item.data.title)
+                            });
 
-                            // "Last Updated: 8-25-2015, 3:25:50"
-                            vm.message = {description: 'Last Updated:', time: moment().format("h:mm:ss")};
+                            // "Last Updated: 3:25 pm"
+                            vm.message = {description: 'Last Updated:', time: moment().format("h:mm a")};
                         }
                     }, function() {
                         vm.errorMessage = 'Sorry about that!';
-                        vm.message = {description: 'Last Attempt:', time: moment().format("h:mm:ss")};
+                        vm.message = {description: 'Last Attempt:', time: moment().format("h:mm a")};
                     });
                 vm.$broadcast('scroll.refreshComplete');
             } else {
-                vm.message = {description: 'Last Attempt:', time: moment().format("h:mm:ss")};
+                vm.message = {description: 'Last Attempt:', time: moment().format("h:mm a")};
 
                 vm.$broadcast('scroll.refreshComplete');
                 vm.errorMessage = "There was an error!";
