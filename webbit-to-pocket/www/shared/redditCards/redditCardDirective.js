@@ -11,7 +11,10 @@
                 collection: '='
             },
             controller: function($scope) {
-                var thing = $scope.$parent.thing.data;
+
+                var vm = $scope;
+
+                var thing = vm.$parent.thing.data;
 
                 var subredditData = thing.subreddit,
                     dateMonth = moment().format('MMMM'),
@@ -21,7 +24,7 @@
 
                 var tagArray = tagData.split(', ');
 
-                $scope.carddata = {
+                vm.carddata = {
                     tags: tagArray,
                     subreddit: 'r/' + thing.subreddit,
                     title: thing.title,
