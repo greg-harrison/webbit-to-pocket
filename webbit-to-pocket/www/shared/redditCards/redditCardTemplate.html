@@ -9,14 +9,11 @@
             </div>
         </div>
     </div>
-    <div class="item">
-        <a class="row item-text-wrap"
-           style="text-decoration: none; color: #336699;"
-           href="{{carddata.link}}"
-           title="{{carddata.link}}"
-           ng-bind="carddata.title"
-           target="_blank">
-       </a>
+    <div class="item" ng-click="titleShow = !titleShow">
+        <strong class="card-title" ng-bind="carddata.title"></strong>
+        <div ng-hide="titleShow">
+            <span class="card-link" ng-bind="carddata.link"></span>
+        </div>
     </div>
     <div class="item item-divider">
         <span ng-repeat="tag in carddata.tags track by $index" style="font-size: 12px; float:right; background-color: #cee3f8; border-radius: 5px; margin-left: 1px; padding: 3px;">{{tag}} </span>

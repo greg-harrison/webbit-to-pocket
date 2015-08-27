@@ -11,18 +11,30 @@
                 collection: '='
             },
             controller: function($scope) {
+                var vm = $scope,
 
-                var vm = $scope;
+                    thing = vm.$parent.thing.data,
 
-                var thing = vm.$parent.thing.data;
+                    domain = null,
 
-                var subredditData = thing.subreddit,
+                    subredditData = thing.subreddit,
                     dateMonth = moment().format('MMMM'),
-                    dateYear = moment().format('YYYY');
+                    dateYear = moment().format('YYYY'),
 
-                var tagData = "r/"+subredditData + ", " + dateYear + " " + dateMonth;
+                    tagData = "r/"+ subredditData + ", " + dateYear + " " + dateMonth,
+                    tagArray = tagData.split(', ');
 
-                var tagArray = tagData.split(', ');
+                console.log(vm.$parent.$id);
+
+                if (!thing.domain.indexOf('self.')) {
+                    domain = 'reddit';
+                    tagArray.push(domain);
+                } else {
+                    domain = thing.domain;
+                    tagArray.push(domain);
+                }
+
+                vm.titleShow = true;
 
                 vm.carddata = {
                     tags: tagArray,

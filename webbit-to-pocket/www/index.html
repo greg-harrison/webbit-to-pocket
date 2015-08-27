@@ -43,7 +43,7 @@
             pulling-text="{{message.description}}&nbsp;{{message.time}}"
             on-refresh="newPosts(entry)">
         </ion-refresher>
-        <tags-input placeholder="Subreddits" add-on-space="true" class="col" ng-model="entry"></tags-input>
+        <tags-input placeholder="{{tagsBar.placeholder}}" add-on-space="true" class="col" ng-model="entry"></tags-input>
         <button class="button button-block button-dark" ng-click="newPosts(entry)">Go</button>
           <span ng-bind="entry.text.toString()"></span>
         <div class="row row-center responsive-lg">

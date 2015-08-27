@@ -9,6 +9,19 @@
     background-color: #EEEEEE;
 }
 
+tags-input .tags .input {
+    height: 100% !important;
+    font-size: inherit;
+}
+
+tags-input {
+    font-size: 20px !important;
+}
+
+tags-input .tags .tag-item {
+    font: inherit;
+}
+
 tags-input .tags .tag-item:nth-child(1n) {
     background-image: none;
     background-color: #80CBC4 !important;
